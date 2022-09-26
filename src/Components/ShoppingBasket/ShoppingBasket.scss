@@ -1,0 +1,36 @@
+.shoppingBasket {
+  padding: 0 20px;
+  .list {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+
+    > li {
+      display: flex;
+      margin-bottom: 15px;
+    }
+  }
+  .itemDeatils {
+    padding: 0 10px;
+    button {
+      padding: 5px;
+      background-color: #ff9f00;
+      border: 1px solid;
+      padding: 5px 10px;
+      cursor: pointer !important;
+      margin-top: 15px;
+    }
+    p {
+      //   margin-bottom: 0;
+      text-align: left;
+    }
+  }
+  .imageHolder {
+    padding: 0 10px;
+    > img {
+      width: 110px;
+      max-height: 150px;
+      object-fit: contain;
+    }
+  }
+}

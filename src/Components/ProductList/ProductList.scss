@@ -1,0 +1,25 @@
+.product-list-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  //   grid-template-rows: 1fr 1fr 1fr;
+  gap: 20px 20px;
+  position: relative;
+  padding: 1rem;
+  background: linear-gradient(0deg, #ccc 92%, transparent);
+  margin-top: -130px;
+  @media screen and (max-width: 850px) {
+    gap: 10px;
+    margin-top: -60px;
+    grid-template-columns: 1fr 1fr;
+    background: linear-gradient(0deg, #ccc 98%, transparent);
+  }
+  @media screen and (max-width: 575px) {
+    grid-template-columns: 1fr;
+    margin-top: -40px;
+  }
+  &::after {
+    display: block;
+    content: "";
+    clear: both;
+  }
+}

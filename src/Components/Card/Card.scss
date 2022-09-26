@@ -1,0 +1,33 @@
+.card {
+  background-color: whitesmoke;
+  padding: 20px;
+  .imageHolder {
+    text-align: center;
+    position: relative;
+    > img {
+      width: auto;
+      max-height: 250px;
+      object-fit: contain;
+    }
+  }
+  .title {
+    text-align: left;
+    margin-bottom: 10px;
+  }
+  .price {
+    text-align: left;
+    margin-bottom: 10px;
+  }
+  .starRating {
+    text-align: left;
+    margin-bottom: 10px;
+  }
+  button {
+    padding: 5px;
+    background-color: #ff9f00;
+    border: 1px solid;
+    padding: 5px 10px;
+    cursor: pointer !important;
+    margin-top: 20px;
+  }
+}
