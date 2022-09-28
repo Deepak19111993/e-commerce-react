@@ -1,34 +1,38 @@
-import { useStateValue } from "../../StateProvider";
+import { useSelector, useDispatch } from "react-redux";
+import { removeCart } from "../../redux/data/action";
 import "./ShoppingBasket.scss";
 
 const ShoppingBasket = () => {
-  const { myReducer } = useStateValue();
-
-  const [state, dispatch] = myReducer;
-
-  const removeCart = (id) => {
-    dispatch({
-      type: "REMOVE_FROM_CART",
-      payload: id,
-    });
-  };
+  const cartListData = useSelector((state) => state.counterReducer.cartList);
+  const dispatch = useDispatch();
   return (
     <div className="shoppingBasket">
       <h2>Your Shopping Basket</h2>
       <hr />
       <ul className="list">
-        {state.cartList.map((item, index) => (
+        {cartListData.length === 0 ? (
+          <p style={{ textAlign: "center" }}>Cart is Empty</p>
+        ) : (
+          ""
+        )}
+        {cartListData.map((item, index) => (
           <li key={index}>
             <div className="imageHolder">
-              <img src={item.imageURL} alt="" />
+              <img src={item.image} alt="" />
             </div>
             <div className="itemDeatils">
-              <div>{item.title}</div>
+              <div>{item.albumTitle}</div>
               <p>
-                <strong>{item.price}</strong>
+                <strong>$ {item.regularPrice}</strong>
               </p>
-              <div>{item.rating}</div>
-              <button onClick={() => removeCart(item.id)}>
+              {/* <div>Rating - {item.rating}</div> */}
+              <p>{item.quantity} Quantity</p>
+              <button
+                onClick={() =>
+                  // removeCart(item.id)
+                  dispatch(removeCart(item.id))
+                }
+              >
                 Remove from Cart
               </button>
             </div>

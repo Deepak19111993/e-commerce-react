@@ -1,18 +1,23 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Header.scss";
-import { useStateValue } from "../../StateProvider";
+// import { useStateValue } from "../../StateProvider";
+import { useSelector } from "react-redux";
+
+import logo from "../../assets/images/online-shopping.png";
 
 const Header = () => {
-  const { myReducer } = useStateValue();
+  const cartListData = useSelector((state) => state.counterReducer.cartList);
+  // const { myReducer } = useStateValue();
 
-  const [state, dispatch] = myReducer;
+  // const [state, dispatch] = myReducer;
 
   return (
     <header>
       <div className="header-logo">
         <Link to="/">
-          <span>E-Shop</span>
+          <img className="logo" src={logo} alt="logo" />
+          {/* <span>E-Shop</span> */}
         </Link>
       </div>
       <div className="header-search-bar">
@@ -28,7 +33,7 @@ const Header = () => {
           <li className="nav-item cart">
             <Link to="/checkout">
               <span>Cart</span>
-              <span className="cart-number">{state.cartList.length}</span>
+              <span className="cart-number">{cartListData.length}</span>
             </Link>
           </li>
         </ul>

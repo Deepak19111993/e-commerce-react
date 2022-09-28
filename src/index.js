@@ -6,13 +6,17 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { StateProvider } from "./StateProvider";
 import { initialState, reducer } from "./reducer";
+import { Provider } from "react-redux";
+import store from "./redux/store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
       <StateProvider initialState={initialState} reducer={reducer}>
-        <App />
+        <Provider store={store}>
+          <App />
+        </Provider>
       </StateProvider>
     </BrowserRouter>
   </React.StrictMode>

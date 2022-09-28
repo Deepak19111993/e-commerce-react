@@ -7,7 +7,7 @@
     flex-direction: column;
     justify-content: space-between;
     width: 300px;
-    height: 100px;
+    // height: 100px;
     padding: 20px;
     background-color: #f3f3f3;
     border: 1px solid #dddddd;
@@ -20,6 +20,11 @@
       background-color: #ff9f00;
       border: 1px solid;
       cursor: pointer;
+    }
+    .block {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
     }
   }
   img {

@@ -1,19 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Card from "../Card/Card";
 import "./ProductList.scss";
-import { useStateValue } from "../../StateProvider";
-// import { initialState } from "../../reducer";
+import { useDispatch, useSelector } from "react-redux";
+import { getFetchData } from "../../redux/data/action";
 
 const ProductList = () => {
-  const data = useStateValue();
+  // const data = useStateValue();
+  const dispatch = useDispatch();
 
-  const productListData = data.initialState.productList;
+  const { productList, loading, cartList, users } = useSelector(
+    (state) => state.counterReducer
+  );
+  const userData = users.products;
+
+  // albumTitle, regularPrice, image,
+
+  console.log("users", userData);
+
   return (
-    <div className="product-list-wrapper">
-      {productListData.map((item, index) => (
-        <Card key={index} {...item} />
-      ))}
-    </div>
+    <>
+      {loading ? <p style={{ textAlign: "center" }}>Lodding</p> : ""}
+      <div className="product-list-wrapper">
+        {userData?.map((item, index) => {
+          return <Card key={index} {...item} id={index} added="false" />;
+        })}
+      </div>
+    </>
   );
 };
 
