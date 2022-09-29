@@ -28,7 +28,8 @@
   }
   button {
     background-color: #ff9f00;
-    border: none;
+    border: 1px solid #ff9f00;
+    line-height: 1;
     padding: 5px 10px;
     cursor: pointer !important;
     margin: auto auto 0 auto;
@@ -39,5 +40,13 @@
     height: 35px;
     font-weight: 600;
     border-radius: 4px;
+    color: #fff;
+    // text-shadow: 0 0 2px black;
+    font-family: "Poppins", sans-serif;
+    transition: 0.2s all;
+    &:hover {
+      background-color: transparent;
+      color: #ff9f00;
+    }
   }
 }

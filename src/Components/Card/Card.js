@@ -1,7 +1,7 @@
 import React from "react";
-import Rating from "../Rating/Rating";
+// import Rating from "../Rating/Rating";
 import "./Card.scss";
-import { useStateValue } from "../../StateProvider";
+// import { useStateValue } from "../../StateProvider";
 import { useDispatch } from "react-redux";
 import { addCart } from "../../redux/data/action";
 

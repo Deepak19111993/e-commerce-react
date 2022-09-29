@@ -33,7 +33,7 @@ const ShoppingBasket = () => {
                   dispatch(removeCart(item.id))
                 }
               >
-                Remove from Cart
+                Remove
               </button>
             </div>
           </li>

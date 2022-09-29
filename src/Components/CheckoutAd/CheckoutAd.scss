@@ -18,8 +18,14 @@
     button {
       padding: 5px;
       background-color: #ff9f00;
-      border: 1px solid;
-      cursor: pointer;
+      border: none;
+      cursor: pointer !important;
+      height: 35px;
+      border-radius: 4px;
+      color: #fff;
+      font-weight: 600;
+      font-size: 14px;
+      text-shadow: 0 0 3px black;
     }
     .block {
       display: flex;
