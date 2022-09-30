@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Header.scss";
 // import { useStateValue } from "../../StateProvider";
@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import logo from "../../assets/images/online-shopping.png";
 
 const Header = () => {
+  const [loginUserName, setLoginUserName] = useState("");
   const navigate = useNavigate();
   const cartListData = useSelector((state) => state.counterReducer.cartList);
   // const { myReducer } = useStateValue();
@@ -17,15 +18,16 @@ const Header = () => {
 
   const tokenObj = JSON.parse(token);
 
-  const loginUserName = Object.entries(tokenObj).map(
-    ([key, val]) => val.firstname
-  );
+  // useEffect(() => {
+  //   setLoginUserName(
+  //     Object.entries(tokenObj).map(([key, val]) => val.firstname)
+  //   );
+  // }, []);
 
-  // console.log("token", ddfkjv);
+  console.log(loginUserName, tokenObj);
 
   const signinClick = () => {
     console.log("hey");
-    // setOpen(true);
     navigate("/login");
   };
 
@@ -40,7 +42,6 @@ const Header = () => {
         <div className="header-logo">
           <Link to="/">
             <img className="logo" src={logo} alt="logo" />
-            {/* <span>E-Shop</span> */}
           </Link>
         </div>
         <div className="header-search-bar">
@@ -50,7 +51,12 @@ const Header = () => {
         <div className="header-navbar">
           <ul>
             <li className="nav-item user">
-              <span>Hello {token ? loginUserName : "Guest"} </span>
+              {/* <span>Hello {token ? loginUserName : "Guest"} </span> */}
+              {tokenObj.map((e, i) => (
+                <span>
+                  Hello {e.firstname} {e.lastname}
+                </span>
+              ))}
 
               {localStorage.getItem("token") ? (
                 <span onClick={handleLogout}>Log Out</span>
@@ -67,7 +73,6 @@ const Header = () => {
           </ul>
         </div>
       </header>
-      {/* <SignInModal open={open} setOpen={setOpen} /> */}
     </>
   );
 };
