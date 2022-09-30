@@ -1,12 +1,15 @@
 .product-list-wrapper {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   //   grid-template-rows: 1fr 1fr 1fr;
   gap: 20px 20px;
   position: relative;
-  padding: 1rem;
+  padding: 1rem 15px;
   background: linear-gradient(0deg, #ccc 96%, transparent);
   margin-top: -130px;
+  @media screen and (max-width: 1440px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
   @media screen and (max-width: 850px) {
     gap: 10px;
     margin-top: -60px;

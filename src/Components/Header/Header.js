@@ -13,9 +13,24 @@ const Header = () => {
   // const [state, dispatch] = myReducer;
   // const [open, setOpen] = useState(false);
 
+  const token = localStorage.getItem("token");
+
+  const tokenObj = JSON.parse(token);
+
+  const loginUserName = Object.entries(tokenObj).map(
+    ([key, val]) => val.firstname
+  );
+
+  // console.log("token", ddfkjv);
+
   const signinClick = () => {
     console.log("hey");
     // setOpen(true);
+    navigate("/login");
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
     navigate("/login");
   };
 
@@ -35,8 +50,13 @@ const Header = () => {
         <div className="header-navbar">
           <ul>
             <li className="nav-item user">
-              <span>Hello Guest</span>
-              <span onClick={signinClick}>Sign In</span>
+              <span>Hello {token ? loginUserName : "Guest"} </span>
+
+              {localStorage.getItem("token") ? (
+                <span onClick={handleLogout}>Log Out</span>
+              ) : (
+                <span onClick={signinClick}>Sign In</span>
+              )}
             </li>
             <li className="nav-item cart">
               <Link to="/checkout">

@@ -9,7 +9,7 @@ header {
   height: 80px;
   gap: 15px;
   padding: 0 15px;
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: 575px) {
     height: 110px;
     align-items: flex-start;
     padding: 20px 15px 0;
@@ -41,13 +41,13 @@ header {
   .header-search-bar {
     flex: 85%;
     display: flex;
-    @media screen and (max-width: 767px) {
+    @media screen and (max-width: 575px) {
       flex: 100%;
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
       top: 75px;
-      width: 95%;
+      width: 90%;
       max-width: 400px;
     }
     input {
@@ -85,6 +85,7 @@ header {
       align-items: center;
       justify-content: flex-end;
       margin: 0;
+      padding: 0 0 0 15px;
       li {
         white-space: nowrap;
         &:not(:last-child) {

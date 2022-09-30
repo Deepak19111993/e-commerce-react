@@ -28,51 +28,71 @@ const SignUp = () => {
       ...user,
       [name]: value,
     });
+    setError(validate(user));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const latestError = validate(user);
+
     setUserData(user);
-    setError(validate(user));
 
-    let updateLocalStorage =
-      JSON.parse(localStorage.getItem("signupform")) || [];
+    if (Object.keys(latestError).length !== 0) {
+      setError(validate(user));
+    } else {
+      let updateLocalStorage =
+        JSON.parse(localStorage.getItem("signupform")) || [];
 
-    updateLocalStorage.push(...data, user);
-    localStorage.setItem("signupform", JSON.stringify(updateLocalStorage));
+      const sameEmail = updateLocalStorage.some((e) => e.email === user.email);
 
-    // setUser("");
-
-    // navigate("/login");
+      if (!sameEmail) {
+        updateLocalStorage.push(...data, user);
+        localStorage.setItem("signupform", JSON.stringify(updateLocalStorage));
+        navigate("/login");
+      }
+    }
   };
+
+  // console.log("error", Object.keys(error).length);
 
   const validate = (value) => {
     let validateError = {};
 
+    let updateLocalStorage =
+      JSON.parse(localStorage.getItem("signupform")) || [];
+
+    const sameEmail = updateLocalStorage.some((e) => e.email === user.email);
+
     if (!value.firstname) {
       validateError.firstname = "First Name is Required!";
     } else if (value.firstname.length < 2) {
-      validateError.firstname = "must be more than 1 character";
+      validateError.firstname = "must be more than 1 character!";
     }
 
     if (!value.lastname) {
       validateError.lastname = "Last Name is Required!";
     } else if (value.lastname.length < 2) {
-      validateError.lastname = "must be more than 1 character";
+      validateError.lastname = "must be more than 1 character!";
     }
 
     if (!value.email) {
       validateError.email = "Email is Required!";
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value.email)) {
+      validateError.email = "Email is not valid!";
+    } else if (sameEmail) {
+      validateError.email = "Already Exist please try another email!";
     }
 
     if (!value.password) {
       validateError.password = "Password is Required!";
+    } else if (value.password.length < 4) {
+      validateError.password = "must be more than 3 character!";
     }
 
     if (!value.confirmpassword) {
       validateError.confirmpassword = "Password is Required!";
     } else if (value.password !== value.confirmpassword) {
-      validateError.confirmpassword = "password is not match";
+      validateError.confirmpassword = "password is not match!";
     }
 
     return validateError;
@@ -92,6 +112,7 @@ const SignUp = () => {
             <label>First Name</label>
             <input
               onChange={handleChange}
+              onBlur={handleChange}
               type="text"
               name="firstname"
               placeholder="Enter the First Name"
@@ -102,6 +123,7 @@ const SignUp = () => {
             <label>Last Name</label>
             <input
               onChange={handleChange}
+              onBlur={handleChange}
               type="text"
               name="lastname"
               placeholder="Enter Last Name"
@@ -112,6 +134,7 @@ const SignUp = () => {
             <label>Email</label>
             <input
               onChange={handleChange}
+              onBlur={handleChange}
               type="email"
               name="email"
               placeholder="Enter Last Name"
@@ -122,6 +145,7 @@ const SignUp = () => {
             <label>Password</label>
             <input
               onChange={handleChange}
+              onBlur={handleChange}
               type="password"
               name="password"
               placeholder="Enter Password"
@@ -132,6 +156,7 @@ const SignUp = () => {
             <label>Confirm Password</label>
             <input
               onChange={handleChange}
+              onBlur={handleChange}
               type="password"
               name="confirmpassword"
               placeholder="Enter Confirm Password"
