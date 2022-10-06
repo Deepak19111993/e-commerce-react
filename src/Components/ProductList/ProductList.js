@@ -8,7 +8,7 @@ const ProductList = () => {
   // const data = useStateValue();
   const dispatch = useDispatch();
 
-  const { productList, loading, cartList, users } = useSelector(
+  const { loading, cartList, users } = useSelector(
     (state) => state.counterReducer
   );
   const userData = users.products;
@@ -19,7 +19,7 @@ const ProductList = () => {
 
   return (
     <>
-      {loading ? <p style={{ textAlign: "center" }}>Lodding</p> : ""}
+      {loading ? <p style={{ textAlign: "center" }}>Loading</p> : ""}
       <div className="product-list-wrapper">
         {userData?.map((item, index) => {
           return <Card key={index} {...item} id={index} added="false" />;

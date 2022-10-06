@@ -1,5 +1,5 @@
-export const MINUS_DATA = "MINUS_DATA";
-export const PLUS_DATA = "PLUS_DATA";
+export const INCREAMENT = "INCREAMENT";
+export const DECREAMENT = "DECREAMENT";
 export const FETCH_DATA = "FETCH_DATA";
 export const SET_FETCH_DATA = "SET_FETCH_DATA";
 

@@ -3,6 +3,8 @@ import {
   REQUEST_FETCH_DATA,
   SUCCESS_FETCH_DATA,
   FAIL_FETCH_DATA,
+  DECREAMENT,
+  INCREAMENT,
 } from "../actionType";
 const REMOVE_FROM_CART = "REMOVE_FROM_CART";
 const ADD_TO_CART = "ADD_TO_CART";
@@ -99,17 +101,18 @@ const data = [
 // );
 
 const initialState = {
-  productList: data,
+  // productList: data,
   cartList: [],
   error: "",
   loading: false,
-  added: false,
   users: [],
 };
 
 const counterReducer = (state = initialState, action) => {
   // console.log("ss", state);
   console.log(state.cartList.findIndex((el) => el));
+  // const sameCounter = state.cartList.map((el) => el.id === action.payload);
+  // console.log(sameCounter);
   switch (action.type) {
     case ADD_TO_CART:
       const abc = state.cartList.findIndex((el) => el.id === action.payload.id);
@@ -151,6 +154,39 @@ const counterReducer = (state = initialState, action) => {
         ...state,
         error: action.payload,
         loading: false,
+      };
+    case INCREAMENT:
+      console.log("Increament Count");
+
+      const increID = state.cartList.findIndex(
+        (el) => el.id === action.payload
+      );
+
+      const stateCartIncre = [...state.cartList];
+
+      stateCartIncre[increID].quantity = stateCartIncre[increID].quantity + 1;
+
+      console.log("action.payload", action.payload);
+
+      return {
+        ...state,
+        cartList: stateCartIncre,
+      };
+    case DECREAMENT:
+      console.log("Decreament Count", state.count);
+      const decreId = state.cartList.findIndex(
+        (el) => el.id === action.payload
+      );
+
+      const stateCartDecre = [...state.cartList];
+
+      stateCartDecre[decreId].quantity =
+        stateCartDecre[decreId].quantity === 1
+          ? 1
+          : stateCartDecre[decreId].quantity - 1;
+      return {
+        ...state,
+        cartList: stateCartDecre,
       };
     default:
       return state;

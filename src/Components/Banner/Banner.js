@@ -9,6 +9,44 @@ const Banner = () => {
   return (
     <div className="banner">
       {/* <button onClick={() => dispatch(getFetchData())}>Button</button> */}
+      {/* <div class="t">
+        <div>
+          <div class="triangle">
+            <span>SEARCH</span>
+            <span>V</span>
+          </div>
+        </div>
+        <div>
+          <div class="triangle">
+            <span>SEARCH</span>
+            <span>V</span>
+          </div>
+        </div>
+        <div>
+          <div class="triangle">
+            <span>SEARCH</span>
+            <span>V</span>
+          </div>
+        </div>
+        <div>
+          <div class="triangle">
+            <span>SEARCH</span>
+            <span>V</span>
+          </div>
+        </div>
+        <div>
+          <div class="triangle">
+            <span>SEARCH</span>
+            <span>V</span>
+          </div>
+        </div>
+        <div>
+          <div class="triangle">
+            <span>SEARCH</span>
+            <span>V</span>
+          </div>
+        </div>
+      </div> */}
       <img
         src="https://m.media-amazon.com/images/I/81KVdS+84PL._SX3000_.jpg"
         alt=""

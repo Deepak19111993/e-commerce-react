@@ -4,9 +4,12 @@ import "./CheckoutAd.scss";
 
 const CheckoutAd = () => {
   const cartListData = useSelector((state) => state.counterReducer.cartList);
+  const countData = useSelector((state) => state.counterReducer.count);
   // const { myReducer } = useStateValue();
 
   // const [state, dispatch] = myReducer;
+
+  console.log(cartListData, countData);
 
   const getTotalAmount = () => {
     let total = 0;
@@ -15,7 +18,7 @@ const CheckoutAd = () => {
       return (total =
         Number(total) +
         Number(
-          item.quantity > 1
+          item.quantity > 0
             ? item.regularPrice * item.quantity
             : item.regularPrice
         ));

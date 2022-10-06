@@ -1,5 +1,5 @@
 import "./App.css";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import Banner from "./Components/Banner/Banner";
 import CheckoutAd from "./Components/CheckoutAd/CheckoutAd";
 import Header from "./Components/Header/Header";
@@ -10,6 +10,8 @@ import { getFetchData } from "./redux/data/action";
 import { useDispatch } from "react-redux";
 import Login from "./Pages/Login/Login";
 import SignUp from "./Pages/SignUp/SignUp";
+import PrivateRoutes from "./Components/PrivateRoutes/PrivateRoutes";
+import PublicRoutes from "./Components/PublicRoutes/PublicRoutes";
 
 function App() {
   const location = useLocation();
@@ -27,28 +29,35 @@ function App() {
         <Header />
       )}
       <Routes>
-        <Route
-          exact
-          path="/"
-          element={
-            <>
-              <Banner />
-              <ProductList />
-            </>
-          }
-        />
-        <Route
-          exact
-          path="/checkout"
-          element={
-            <>
-              <CheckoutAd />
-              <ShoppingBasket />
-            </>
-          }
-        />
-        <Route exact path="/login" element={<Login />} />
-        <Route exact path="/signup" element={<SignUp />} />
+        <Route element={<PrivateRoutes />}>
+          <Route
+            exact={true}
+            path="/"
+            element={
+              <>
+                <Banner />
+                <ProductList />
+              </>
+            }
+          />
+          <Route
+            exact={true}
+            path="/checkout"
+            element={
+              <>
+                <CheckoutAd />
+                <ShoppingBasket />
+              </>
+            }
+          />
+          {/* <Route exact={true} path="*" element={<Navigate to="/" />} /> */}
+        </Route>
+
+        <Route element={<PublicRoutes />}>
+          <Route exact={true} path="/login" element={<Login />} />
+          <Route exact={true} path="/signup" element={<SignUp />} />
+        </Route>
+        <Route exact={true} path="*" element={<Navigate to="/login" />} />
       </Routes>
     </div>
   );

@@ -1,4 +1,4 @@
-import { REQUEST_FETCH_DATA } from "../actionType";
+import { DECREAMENT, INCREAMENT, REQUEST_FETCH_DATA } from "../actionType";
 
 const ADD_TO_CART = "ADD_TO_CART";
 const REMOVE_FROM_CART = "REMOVE_FROM_CART";
@@ -14,6 +14,16 @@ export const addCart = (payload) => ({
 });
 export const removeCart = (payload) => ({
   type: REMOVE_FROM_CART,
+  payload,
+});
+
+export const incre = (payload) => ({
+  type: INCREAMENT,
+  payload,
+});
+
+export const decre = (payload) => ({
+  type: DECREAMENT,
   payload,
 });
 

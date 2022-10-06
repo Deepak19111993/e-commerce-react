@@ -58,5 +58,10 @@
       background-color: transparent;
       color: #ff9f00;
     }
+    &.disabled {
+      pointer-events: none;
+      background: #ccc !important;
+      border: #ccc;
+    }
   }
 }
