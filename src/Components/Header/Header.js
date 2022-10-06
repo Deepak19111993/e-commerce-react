@@ -52,7 +52,7 @@ const Header = () => {
           <ul>
             <li className="nav-item user">
               {/* <span>Hello {token ? loginUserName : "Guest"} </span> */}
-              {tokenObj.map((e, i) => (
+              {tokenObj?.map((e, i) => (
                 <span>
                   Hello {e.firstname} {e.lastname}
                 </span>

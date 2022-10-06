@@ -10,7 +10,7 @@ import { getFetchData } from "./redux/data/action";
 import { useDispatch } from "react-redux";
 import Login from "./Pages/Login/Login";
 import SignUp from "./Pages/SignUp/SignUp";
-import PrivateRoutes from "./Components/PrivateRoutes/PrivateRoutes";
+import PrivateRoutes from "./Components/PrivateRoute/PrivateRoutes";
 import PublicRoutes from "./Components/PublicRoutes/PublicRoutes";
 
 function App() {
@@ -31,7 +31,7 @@ function App() {
       <Routes>
         <Route element={<PrivateRoutes />}>
           <Route
-            exact={true}
+            exact
             path="/"
             element={
               <>
@@ -41,7 +41,7 @@ function App() {
             }
           />
           <Route
-            exact={true}
+            exact
             path="/checkout"
             element={
               <>
@@ -50,14 +50,14 @@ function App() {
               </>
             }
           />
-          {/* <Route exact={true} path="*" element={<Navigate to="/" />} /> */}
+          {/* <Route exact path="*" element={<Navigate to="/" />} /> */}
         </Route>
 
         <Route element={<PublicRoutes />}>
-          <Route exact={true} path="/login" element={<Login />} />
-          <Route exact={true} path="/signup" element={<SignUp />} />
+          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/signup" element={<SignUp />} />
         </Route>
-        <Route exact={true} path="*" element={<Navigate to="/login" />} />
+        <Route exact path="*" element={<Navigate to="/login" />} />
       </Routes>
     </div>
   );
