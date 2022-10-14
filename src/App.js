@@ -12,6 +12,7 @@ import Login from "./Pages/Login/Login";
 import SignUp from "./Pages/SignUp/SignUp";
 import PrivateRoutes from "./Components/PrivateRoute/PrivateRoutes";
 import PublicRoutes from "./Components/PublicRoutes/PublicRoutes";
+import Slot from "./Components/Slot/Slot";
 
 function App() {
   const location = useLocation();
@@ -50,7 +51,7 @@ function App() {
               </>
             }
           />
-          {/* <Route exact path="*" element={<Navigate to="/" />} /> */}
+          <Route exact path="/slot" element={<Slot />} />
         </Route>
 
         <Route element={<PublicRoutes />}>

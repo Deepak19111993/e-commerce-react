@@ -36,6 +36,12 @@ const Header = () => {
     navigate("/login");
   };
 
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     localStorage.clear();
+  //   }, 5000);
+  // });
+
   return (
     <>
       <header>

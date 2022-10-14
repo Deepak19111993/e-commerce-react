@@ -15,7 +15,7 @@ const ProductList = () => {
 
   // albumTitle, regularPrice, image,
 
-  console.log("users", userData);
+  // console.log("users", userData);
 
   return (
     <>

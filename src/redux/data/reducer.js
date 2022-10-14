@@ -110,16 +110,16 @@ const initialState = {
 
 const counterReducer = (state = initialState, action) => {
   // console.log("ss", state);
-  console.log(state.cartList.findIndex((el) => el));
+  // console.log(state.cartList.findIndex((el) => el));
   // const sameCounter = state.cartList.map((el) => el.id === action.payload);
   // console.log(sameCounter);
   switch (action.type) {
     case ADD_TO_CART:
       const abc = state.cartList.findIndex((el) => el.id === action.payload.id);
-      console.log("qqac", action);
+      // console.log("qqac", action);
 
       let mainCart = [...state.cartList];
-      console.log(mainCart);
+      // console.log(mainCart);
 
       if (abc === -1) {
         mainCart = [...state.cartList, { ...action.payload, quantity: 1 }];
@@ -173,7 +173,7 @@ const counterReducer = (state = initialState, action) => {
         cartList: stateCartIncre,
       };
     case DECREAMENT:
-      console.log("Decreament Count", state.count);
+      // console.log("Decreament Count", state.count);
       const decreId = state.cartList.findIndex(
         (el) => el.id === action.payload
       );

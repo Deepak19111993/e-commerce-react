@@ -1,13 +1,15 @@
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import ReactDOM from "react-dom/client";
-import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { StateProvider } from "./StateProvider";
 import { initialState, reducer } from "./reducer";
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import "./index.css";
+import "antd/dist/antd.css";
+// import "react-modern-calendar-datepicker/lib/DatePicker.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

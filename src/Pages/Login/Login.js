@@ -66,6 +66,13 @@ const Login = () => {
           localStorage.setItem("token", JSON.stringify(userFilter));
           navigate("/");
         }
+      } else {
+        if (Object.keys(loginLatestError).length !== 0) {
+          alert("solve the error!");
+        } else {
+          // !localStorage.getItem("signupform") &&
+          alert("you don't have a Sign Up Credential so please first Sign Up!");
+        }
       }
     }
 

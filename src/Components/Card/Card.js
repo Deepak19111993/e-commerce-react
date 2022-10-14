@@ -10,7 +10,7 @@ const Card = ({ albumTitle, regularPrice, image, id }) => {
 
   const { cartList, users } = useSelector((state) => state.counterReducer);
 
-  console.log("cartList", cartList);
+  // console.log("cartList", cartList);
   // console.log("users", users.products);
 
   // console.log(
