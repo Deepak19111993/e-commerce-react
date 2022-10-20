@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Alert, DatePicker } from "antd";
-import { isEmpty } from "lodash";
+import _, { isEmpty } from "lodash";
 import "./Slot.scss";
 import moment from "moment";
 
@@ -10,21 +10,23 @@ const Slot = () => {
   const [slotObj, setSlotObj] = useState({});
   const [slotArray, setSlotArray] = useState([]);
   const [error, setError] = useState(false);
+  const [firstDay, setFirstDay] = useState("");
+  const [lastDay, setLastDay] = useState("");
 
   var arrValue = [0, 1, 2, 3, 4, 5, 6];
 
-  // var greaterArr = [];
-  // var lessArr = [];
-  // var equalArr = [];
   var getIndArr = [];
 
   const handleChange = (value) => {
     console.log(value);
-    console.log("AFTER", value[0].isAfter(value[1]));
-    console.log("BEFORE", value[0].isBefore(value[1]));
-    console.log("SAME AFTER", value[0].isSameOrAfter(value[1]));
-    console.log("PASKDPOA", value[0].day(), value[1].day());
-    // console.log(moment().range(value[0].day(), value[1].day()));
+    // console.log("AFTER", value[0].isAfter(value[1]));
+    // console.log("BEFORE", value[0].isBefore(value[1]));
+    // console.log("SAME AFTER", value[0].isSameOrAfter(value[1]));
+    // console.log("PASKDPOA", value[0].day(), value[1].day());
+
+    console.log("Hour", value[0].hour(), value[1].hour());
+    console.log("Minute", value[0].minute(), value[1].minute());
+    console.log("Second", value[0].second(), value[1].second());
 
     // console.log(moment.duration(value[0].day().diff(value[1].day())).asDays());
     // setstartdateRange(value[0].format("ddd,MMMM Do YYYY,h:mm:ss,A").split(","));
@@ -33,11 +35,27 @@ const Slot = () => {
     var firstValue = value[0].day();
     var lastValue = value[1].day();
 
+    let h = 24;
+    let m = 60;
+
+    let hourArr = [];
+    let minuteArr = [];
+
+    for (let i = value[0].hour(); i <= h; i++) {
+      // console.log("Hours", i);
+      hourArr.push(i);
+    }
+
+    for (let i = value[0].minute(); i <= m; i++) {
+      // console.log("Minutes", i);
+      minuteArr.push(i);
+    }
+
+    // console.log("hourArr", hourArr);
+    // console.log("minuteArr", minuteArr);
+
     var firstIn = arrValue.indexOf(firstValue);
     var lastIn = arrValue.indexOf(lastValue);
-
-    // console.log(arrValue.indexOf(firstValue));
-    // console.log(arrValue.indexOf(lastValue));
 
     // greater array EX: [5,6,0,1,2]
     if (firstIn > lastIn) {
@@ -70,81 +88,144 @@ const Slot = () => {
       }
     }
 
-    console.log("getIndArr", getIndArr);
+    // console.log("getIndArr", getIndArr);
 
     setSlotObj({
       start: {
         day: value[0].format("ddd"),
         date: value[0].format("MMMM Do YYYY"),
         time: value[0].format("h:mm:ss"),
-        ast: value[0].format("A"),
+        timeH: value[0].hour(),
+        index: firstIn,
+        // ast: value[0].format("A"),
       },
       end: {
         day: value[1].format("ddd"),
         date: value[1].format("MMMM Do YYYY"),
         time: value[1].format("h:mm:ss"),
-        ast: value[1].format("A"),
+        timeH: value[1].hour(),
+        index: lastIn,
+        // ast: value[1].format("A"),
       },
-      getIndex: getIndArr,
+      dayIndex: getIndArr,
     });
 
-    console.log(slotArray.map((e) => e?.getIndex).includes(slotObj?.getIndex));
+    const getWeekDay = (weekNumber) => {
+      switch (weekNumber) {
+        case 0:
+          console.log("Sun");
+          return "Sun";
+        case 1:
+          console.log("Mon");
+          return "Mon";
+        case 2:
+          console.log("Tue");
+          return "Tue";
+        case 3:
+          console.log("Wed");
+          return "Wed";
+        case 4:
+          console.log("Thu");
+          return "Thu";
+        case 5:
+          console.log("Fri");
+          return "Fri";
+        case 6:
+          console.log("Sat");
+          return "Sat";
+        default:
+      }
+    };
+
+    setFirstDay(getWeekDay(firstValue));
+    setLastDay(getWeekDay(lastValue));
   };
 
-  // console.log(arrValue.some((e) => getIndArr.includes(e)));
-  console.log(
-    "ArrSlot",
-    slotArray.map((e) => e?.getIndex.map((e) => slotObj?.getIndex.includes(e)))
-  );
-
-  // console.log(
-  //   slotArray.some((e) =>
-  //     e?.selectedSlot?.getIndex.includes(
-  //       slotObj?.selectedSlot?.getIndex?.map((e) => e)
-  //     )
-  //   )
-  // );
-
-  // console.log(slotObj?.getIndex.includes(10));
-
-  console.log("slotArray", slotArray);
-
-  var newArrforCoun = slotArray.map((e) =>
-    e?.getIndex.map((e) => slotObj?.getIndex.includes(e))
-  );
-
   useEffect(() => {
-    // Object.values(slotObj).length > 0 && setSlotArray([...slotArray, slotObj]);
-    // !isEmpty(slotObj) && setSlotArray([...slotArray, slotObj]);
-
-    const dk = slotArray.map((e) => e?.getIndex).includes(slotObj?.getIndex);
-
-    console.log("dk", dk);
-
-    if (
-      slotArray.map((e, i) => e?.start?.day).includes(slotObj?.start?.day) ||
-      (slotArray.map((e, i) => e?.end?.day).includes(slotObj?.end?.day) &&
-        newArrforCoun.map((e) => e.includes(true)))
-    ) {
-      !isEmpty(slotObj) && setSlotArray([...slotArray]);
-      setError(true);
-    } else {
+    if (slotArray.length === 0) {
       !isEmpty(slotObj) && setSlotArray([...slotArray, slotObj]);
-      setError(false);
-    }
+    } else {
+      // to close parent loop if close nested loop
+      var exitLoop = false;
+      // first loop for get array length and loop
+      const indexOneArrStartObj = slotObj?.start?.timeH;
+      const indexOneArrEndObj = slotObj?.end?.timeH;
+      for (let i = 0; i < slotArray.length; i++) {
+        // second loop for get new value day and time length and object
+        for (let y = 0; y < slotObj?.dayIndex.length; y++) {
+          // return true and false value while checking in array and new obj
+          const trueArr = slotArray[i]?.dayIndex.includes(slotObj?.dayIndex[y]);
 
-    // new functionality
+          // const indexOneArrStartIndex = slotArray[i]?.start?.index;
+          // const indexOneArrEndIndex = slotArray[i]?.end?.index;
+          // const indexOneArrStart = slotArray[i]?.start?.timeH;
+          // const indexOneArrEnd = slotArray[i]?.end?.timeH;
+          // console.log(indexOneArrStart, indexOneArrStartObj);
+          // console.log(indexOneArrEnd, indexOneArrEndObj);
+          // console.log("index", indexOneArrStartIndex, indexOneArrEndIndex);
+
+          // if (
+          //   indexOneArrStart > indexOneArrStartObj ||
+          //   indexOneArrEnd < indexOneArrEndObj
+          // ) {
+          //   console.log("time is between the selected time slot is booked!");
+          // } else {
+          //   console.log("time can add!");
+          // }
+
+          // check the value of true and false for valide
+          if (trueArr === true) {
+            // if (indexOneArrStartIndex) {
+            //   if (indexOneArrStartObj < indexOneArrEnd) {
+            //     console.log("dk");
+            //   }
+            // } else if (indexOneArrEndIndex) {
+            //   if (indexOneArrEndObj > indexOneArrStart) {
+            //     console.log("nk");
+            //   }
+            // }
+
+            // if (indexOneArrStartIndex && indexOneArrEndIndex) {
+            //   if (
+            //     indexOneArrStartObj < indexOneArrEnd ||
+            //     indexOneArrEndObj > indexOneArrStart
+            //   ) {
+            //     console.log(
+            //       "time is between the selected time slot is booked!"
+            //     );
+            //   } else {
+            //     console.log("time can add!");
+            //   }
+            // }
+
+            // if (
+            //   indexOneArrStartObj < indexOneArrEnd ||
+            //   indexOneArrEndObj > indexOneArrStart
+            // ) {
+            //   console.log("time is between the selected time slot is booked!");
+            // } else {
+            //   console.log("time can add!");
+            // }
+
+            !isEmpty(slotObj) && setSlotArray([...slotArray]); //add exist array if true
+            setError(true); // if value true show error
+            exitLoop = true; // assign true value to stop parent loop
+            break; // stop loop
+          } else if (trueArr === false) {
+            !isEmpty(slotObj) && setSlotArray([...slotArray, slotObj]); // add new value in array if not true
+            setError(false); // if value false hide error
+          }
+        }
+        // stop loop
+        if (exitLoop) {
+          break;
+        }
+      }
+    }
   }, [slotObj]);
 
   console.log("slotObj", slotObj);
   console.log("slotArray", slotArray);
-
-  console.log(
-    "www",
-    slotArray.map((x) => x?.getIndex.includes(slotObj?.getIndex))
-  );
-  // console.log(arrValue.some((e) => slotArray?.getIndArr.indexOf(e)));
-
   return (
     <div>
       <form>
@@ -154,7 +235,7 @@ const Slot = () => {
               showTime
               showToday
               onChange={(e) => handleChange(e)}
-              format={"ddd, MMMM Do YYYY, h:mm:ss A"}
+              format={"ddd, MMMM Do YYYY, h:mm:ss"}
             />
           </div>
         </div>
@@ -173,37 +254,13 @@ const Slot = () => {
           <Alert
             message={
               <div style={{ color: "red" }}>
-                {slotArray
-                  .map((e, i) => e?.start?.day)
-                  .includes(slotObj?.start?.day) && (
-                  <span
-                    style={{
-                      color: "#000",
-                      textDecoration: "underline",
-                      margin: "0 5px 0",
-                      fontWeight: "600",
-                    }}
-                  >
-                    {slotObj?.start?.day}
-                  </span>
-                )}{" "}
-                {slotArray
-                  .map((e, i) => e?.end?.day)
-                  .includes(slotObj?.end?.day) && <span>and</span>}{" "}
-                {slotArray
-                  .map((e, i) => e?.end?.day)
-                  .includes(slotObj?.end?.day) && (
-                  <span
-                    style={{
-                      color: "#000",
-                      textDecoration: "underline",
-                      margin: "0 5px 0",
-                      fontWeight: "600",
-                    }}
-                  >
-                    {slotObj?.end?.day}
-                  </span>
-                )}{" "}
+                <span style={{ color: "#000", fontWeight: "600" }}>
+                  {firstDay}
+                </span>{" "}
+                {lastDay && "to"}{" "}
+                <span style={{ color: "#000", fontWeight: "600" }}>
+                  {lastDay}
+                </span>{" "}
                 is already booked! Please Select another day!
               </div>
             }
@@ -217,40 +274,40 @@ const Slot = () => {
       {!isEmpty(slotObj) && (
         <div className="arrBlock">
           <div className="leftBlock">
-            <div className="title">Start week</div>
+            <div className="title">Start Day Booked</div>
             {slotArray.map((e, i) => (
               <div className="objBlock">
                 <div>
                   <span>Day</span> <span>{e.start.day}</span>
                 </div>
-                <div>
+                {/* <div>
                   <span>Date</span> <span>{e.start.date}</span>
-                </div>
+                </div> */}
                 <div>
                   <span>Time</span> <span>{e.start.time}</span>
                 </div>
-                <div>
+                {/* <div>
                   <span>Ast</span> <span>{e.start.ast}</span>
-                </div>
+                </div> */}
               </div>
             ))}
           </div>
           <div className="rightBlock">
-            <div className="title">End week</div>
+            <div className="title">End Day Booked</div>
             {slotArray.map((e, i) => (
               <div className="objBlock">
                 <div>
                   <span>Day</span> <span>{e.end.day}</span>
                 </div>
-                <div>
+                {/* <div>
                   <span>Date</span> <span>{e.end.date}</span>
-                </div>
+                </div> */}
                 <div>
                   <span>Time</span> <span>{e.end.time}</span>
                 </div>
-                <div>
+                {/* <div>
                   <span>Ast</span> <span>{e.end.ast}</span>
-                </div>
+                </div> */}
               </div>
             ))}
           </div>
