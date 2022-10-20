@@ -156,57 +156,8 @@ const Slot = () => {
           // return true and false value while checking in array and new obj
           const trueArr = slotArray[i]?.dayIndex.includes(slotObj?.dayIndex[y]);
 
-          // const indexOneArrStartIndex = slotArray[i]?.start?.index;
-          // const indexOneArrEndIndex = slotArray[i]?.end?.index;
-          // const indexOneArrStart = slotArray[i]?.start?.timeH;
-          // const indexOneArrEnd = slotArray[i]?.end?.timeH;
-          // console.log(indexOneArrStart, indexOneArrStartObj);
-          // console.log(indexOneArrEnd, indexOneArrEndObj);
-          // console.log("index", indexOneArrStartIndex, indexOneArrEndIndex);
-
-          // if (
-          //   indexOneArrStart > indexOneArrStartObj ||
-          //   indexOneArrEnd < indexOneArrEndObj
-          // ) {
-          //   console.log("time is between the selected time slot is booked!");
-          // } else {
-          //   console.log("time can add!");
-          // }
-
           // check the value of true and false for valide
           if (trueArr === true) {
-            // if (indexOneArrStartIndex) {
-            //   if (indexOneArrStartObj < indexOneArrEnd) {
-            //     console.log("dk");
-            //   }
-            // } else if (indexOneArrEndIndex) {
-            //   if (indexOneArrEndObj > indexOneArrStart) {
-            //     console.log("nk");
-            //   }
-            // }
-
-            // if (indexOneArrStartIndex && indexOneArrEndIndex) {
-            //   if (
-            //     indexOneArrStartObj < indexOneArrEnd ||
-            //     indexOneArrEndObj > indexOneArrStart
-            //   ) {
-            //     console.log(
-            //       "time is between the selected time slot is booked!"
-            //     );
-            //   } else {
-            //     console.log("time can add!");
-            //   }
-            // }
-
-            // if (
-            //   indexOneArrStartObj < indexOneArrEnd ||
-            //   indexOneArrEndObj > indexOneArrStart
-            // ) {
-            //   console.log("time is between the selected time slot is booked!");
-            // } else {
-            //   console.log("time can add!");
-            // }
-
             !isEmpty(slotObj) && setSlotArray([...slotArray]); //add exist array if true
             setError(true); // if value true show error
             exitLoop = true; // assign true value to stop parent loop
