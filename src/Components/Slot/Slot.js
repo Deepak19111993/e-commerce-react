@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Alert, DatePicker } from "antd";
-import _, { isEmpty } from "lodash";
+import { isEmpty } from "lodash";
 import "./Slot.scss";
 import moment from "moment";
-
+import { tuple } from "antd/es/_util/type";
+// moment().isAfter(moment());
 const { RangePicker } = DatePicker;
 
 const Slot = () => {
+  const [dateValue, setDateValue] = useState([]);
   const [slotObj, setSlotObj] = useState({});
   const [slotArray, setSlotArray] = useState([]);
   const [error, setError] = useState(false);
@@ -19,14 +21,16 @@ const Slot = () => {
 
   const handleChange = (value) => {
     console.log(value);
+    setDateValue([value[0], value[1]]);
+
     // console.log("AFTER", value[0].isAfter(value[1]));
     // console.log("BEFORE", value[0].isBefore(value[1]));
     // console.log("SAME AFTER", value[0].isSameOrAfter(value[1]));
     // console.log("PASKDPOA", value[0].day(), value[1].day());
 
-    console.log("Hour", value[0].hour(), value[1].hour());
-    console.log("Minute", value[0].minute(), value[1].minute());
-    console.log("Second", value[0].second(), value[1].second());
+    // console.log("Hour", value[0].hour(), value[1].hour());
+    // console.log("Minute", value[0].minute(), value[1].minute());
+    // console.log("Second", value[0].second(), value[1].second());
 
     // console.log(moment.duration(value[0].day().diff(value[1].day())).asDays());
     // setstartdateRange(value[0].format("ddd,MMMM Do YYYY,h:mm:ss,A").split(","));
@@ -34,25 +38,6 @@ const Slot = () => {
 
     var firstValue = value[0].day();
     var lastValue = value[1].day();
-
-    let h = 24;
-    let m = 60;
-
-    let hourArr = [];
-    let minuteArr = [];
-
-    for (let i = value[0].hour(); i <= h; i++) {
-      // console.log("Hours", i);
-      hourArr.push(i);
-    }
-
-    for (let i = value[0].minute(); i <= m; i++) {
-      // console.log("Minutes", i);
-      minuteArr.push(i);
-    }
-
-    // console.log("hourArr", hourArr);
-    // console.log("minuteArr", minuteArr);
 
     var firstIn = arrValue.indexOf(firstValue);
     var lastIn = arrValue.indexOf(lastValue);
@@ -81,31 +66,27 @@ const Slot = () => {
       }
       // less array EX: [1 to 6]
       else {
-        for (let i = arrValue.indexOf(firstValue); i <= lastIn; i++) {
+        for (let i = firstIn; i <= lastIn; i++) {
           console.log("Less", i);
           getIndArr.push(i);
         }
       }
     }
 
-    // console.log("getIndArr", getIndArr);
-
     setSlotObj({
       start: {
         day: value[0].format("ddd"),
         date: value[0].format("MMMM Do YYYY"),
-        time: value[0].format("h:mm:ss"),
-        timeH: value[0].hour(),
+        time: value[0].format("HH:mm:ss"),
         index: firstIn,
-        // ast: value[0].format("A"),
+        timeStamp: parseInt(value[0].format("X")),
       },
       end: {
         day: value[1].format("ddd"),
         date: value[1].format("MMMM Do YYYY"),
-        time: value[1].format("h:mm:ss"),
-        timeH: value[1].hour(),
+        time: value[1].format("HH:mm:ss"),
         index: lastIn,
-        // ast: value[1].format("A"),
+        timeStamp: parseInt(value[1].format("X")),
       },
       dayIndex: getIndArr,
     });
@@ -139,6 +120,7 @@ const Slot = () => {
 
     setFirstDay(getWeekDay(firstValue));
     setLastDay(getWeekDay(lastValue));
+    setDateValue([]);
   };
 
   useEffect(() => {
@@ -146,31 +128,27 @@ const Slot = () => {
       !isEmpty(slotObj) && setSlotArray([...slotArray, slotObj]);
     } else {
       // to close parent loop if close nested loop
-      var exitLoop = false;
       // first loop for get array length and loop
-      const indexOneArrStartObj = slotObj?.start?.timeH;
-      const indexOneArrEndObj = slotObj?.end?.timeH;
+      let isValidSlot = true;
       for (let i = 0; i < slotArray.length; i++) {
         // second loop for get new value day and time length and object
-        for (let y = 0; y < slotObj?.dayIndex.length; y++) {
-          // return true and false value while checking in array and new obj
-          const trueArr = slotArray[i]?.dayIndex.includes(slotObj?.dayIndex[y]);
 
-          // check the value of true and false for valide
-          if (trueArr === true) {
-            !isEmpty(slotObj) && setSlotArray([...slotArray]); //add exist array if true
-            setError(true); // if value true show error
-            exitLoop = true; // assign true value to stop parent loop
-            break; // stop loop
-          } else if (trueArr === false) {
-            !isEmpty(slotObj) && setSlotArray([...slotArray, slotObj]); // add new value in array if not true
-            setError(false); // if value false hide error
-          }
+        // console.log("asdds--", slotObj?.start?.timeStamp);
+        if (
+          (slotArray[i]?.start?.timeStamp < slotObj?.start?.timeStamp &&
+            slotArray[i]?.end?.timeStamp > slotObj?.start?.timeStamp) ||
+          (slotArray[i]?.start?.timeStamp < slotObj?.end?.timeStamp &&
+            slotArray[i]?.end?.timeStamp > slotObj?.end?.timeStamp)
+        ) {
+          !isEmpty(slotObj) && setSlotArray([...slotArray]); //add exist array if true
+          setError(true); // if value true show error
+          isValidSlot = false;
+          break; // stop loop
         }
-        // stop loop
-        if (exitLoop) {
-          break;
-        }
+      }
+      if (isValidSlot) {
+        !isEmpty(slotObj) && setSlotArray([...slotArray, slotObj]); // add new value in array if not true
+        setError(false); // if value false hide error
       }
     }
   }, [slotObj]);
@@ -183,10 +161,12 @@ const Slot = () => {
         <div className="input-field">
           <div className="float-label">
             <RangePicker
+              defaultValue={[]}
+              value={dateValue}
               showTime
               showToday
               onChange={(e) => handleChange(e)}
-              format={"ddd, MMMM Do YYYY, h:mm:ss"}
+              format={"ddd, MMMM Do YYYY, HH:mm:ss"}
             />
           </div>
         </div>
@@ -205,19 +185,18 @@ const Slot = () => {
           <Alert
             message={
               <div style={{ color: "red" }}>
-                <span style={{ color: "#000", fontWeight: "600" }}>
+                {/* <span style={{ color: "#000", fontWeight: "600" }}>
                   {firstDay}
                 </span>{" "}
                 {lastDay && "to"}{" "}
                 <span style={{ color: "#000", fontWeight: "600" }}>
                   {lastDay}
-                </span>{" "}
-                is already booked! Please Select another day!
+                </span>{" "} */}
+                Selected Time & Day is already booked, Please Select another!
               </div>
             }
             type="error"
             closable
-            // onClose={onClose}
           />
         </p>
       )}
@@ -231,15 +210,9 @@ const Slot = () => {
                 <div>
                   <span>Day</span> <span>{e.start.day}</span>
                 </div>
-                {/* <div>
-                  <span>Date</span> <span>{e.start.date}</span>
-                </div> */}
                 <div>
                   <span>Time</span> <span>{e.start.time}</span>
                 </div>
-                {/* <div>
-                  <span>Ast</span> <span>{e.start.ast}</span>
-                </div> */}
               </div>
             ))}
           </div>
@@ -250,15 +223,9 @@ const Slot = () => {
                 <div>
                   <span>Day</span> <span>{e.end.day}</span>
                 </div>
-                {/* <div>
-                  <span>Date</span> <span>{e.end.date}</span>
-                </div> */}
                 <div>
                   <span>Time</span> <span>{e.end.time}</span>
                 </div>
-                {/* <div>
-                  <span>Ast</span> <span>{e.end.ast}</span>
-                </div> */}
               </div>
             ))}
           </div>
