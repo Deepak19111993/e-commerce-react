@@ -138,10 +138,22 @@ const Slot = () => {
           (slotArray[i]?.start?.timeStamp < slotObj?.start?.timeStamp &&
             slotArray[i]?.end?.timeStamp > slotObj?.start?.timeStamp) ||
           (slotArray[i]?.start?.timeStamp < slotObj?.end?.timeStamp &&
-            slotArray[i]?.end?.timeStamp > slotObj?.end?.timeStamp)
+            slotArray[i]?.end?.timeStamp > slotObj?.end?.timeStamp) ||
+          (slotArray[i]?.end?.timeStamp < slotObj?.start?.timeStamp &&
+            slotArray[i]?.start?.timeStamp > slotObj?.start?.timeStamp) ||
+          (slotArray[i]?.end?.timeStamp < slotObj?.end?.timeStamp &&
+            slotArray[i]?.start?.timeStamp > slotObj?.end?.timeStamp)
         ) {
           !isEmpty(slotObj) && setSlotArray([...slotArray]); //add exist array if true
           setError(true); // if value true show error
+
+          setTimeout(() => {
+            setError(true);
+            setTimeout(() => {
+              setError(false);
+            }, 5000);
+          });
+
           isValidSlot = false;
           break; // stop loop
         }

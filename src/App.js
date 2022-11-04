@@ -13,6 +13,7 @@ import SignUp from "./Pages/SignUp/SignUp";
 import PrivateRoutes from "./Components/PrivateRoute/PrivateRoutes";
 import PublicRoutes from "./Components/PublicRoutes/PublicRoutes";
 import Slot from "./Components/Slot/Slot";
+import Sidebar from "./Components/Sidebar/Sidebar";
 
 function App() {
   const location = useLocation();
@@ -27,7 +28,10 @@ function App() {
       {location.pathname === "/login" || location.pathname === "/signup" ? (
         ""
       ) : (
-        <Header />
+        <>
+          <Header />
+          <Sidebar />
+        </>
       )}
       <Routes>
         <Route element={<PrivateRoutes />}>
