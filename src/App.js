@@ -14,6 +14,8 @@ import PrivateRoutes from "./Components/PrivateRoute/PrivateRoutes";
 import PublicRoutes from "./Components/PublicRoutes/PublicRoutes";
 import Slot from "./Components/Slot/Slot";
 import Sidebar from "./Components/Sidebar/Sidebar";
+import PdfUpload from "./Components/PdfUpload/PdfUpload";
+import Stepper from "./Pages/Stepper/Stepper";
 
 function App() {
   const location = useLocation();
@@ -33,37 +35,41 @@ function App() {
           <Sidebar />
         </>
       )}
-      <Routes>
-        <Route element={<PrivateRoutes />}>
-          <Route
-            exact
-            path="/"
-            element={
-              <>
-                <Banner />
-                <ProductList />
-              </>
-            }
-          />
-          <Route
-            exact
-            path="/checkout"
-            element={
-              <>
-                <CheckoutAd />
-                <ShoppingBasket />
-              </>
-            }
-          />
-          <Route exact path="/slot" element={<Slot />} />
-        </Route>
+      <div className="content">
+        <Routes>
+          <Route element={<PrivateRoutes />}>
+            <Route
+              exact
+              path="/"
+              element={
+                <>
+                  <Banner />
+                  <ProductList />
+                </>
+              }
+            />
+            <Route
+              exact
+              path="/checkout"
+              element={
+                <>
+                  <CheckoutAd />
+                  <ShoppingBasket />
+                </>
+              }
+            />
+            <Route exact path="/slot" element={<Slot />} />
+            <Route exact path="/pdfupload" element={<PdfUpload />} />
+            <Route exact path="/stepper" element={<Stepper />} />
+          </Route>
 
-        <Route element={<PublicRoutes />}>
-          <Route exact path="/login" element={<Login />} />
-          <Route exact path="/signup" element={<SignUp />} />
-        </Route>
-        <Route exact path="*" element={<Navigate to="/login" />} />
-      </Routes>
+          <Route element={<PublicRoutes />}>
+            <Route exact path="/login" element={<Login />} />
+            <Route exact path="/signup" element={<SignUp />} />
+          </Route>
+          <Route exact path="*" element={<Navigate to="/login" />} />
+        </Routes>
+      </div>
     </div>
   );
 }

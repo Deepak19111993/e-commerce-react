@@ -1,25 +1,8 @@
 import React, { useState } from "react";
 
-const SidebarItem = ({
-  item,
-  id,
-  name,
-  activeId,
-  handleOpen,
-  handleOpenChild,
-  parentId,
-  childId,
-  grandChildId,
-  setParentId,
-  setChildId,
-  setGrandChildId,
-  handleParentId,
-  handleChildId,
-  handleGrandChildId,
-  handleClick,
-}) => {
+const SidebarItem = ({ item, id, name, activeId, handleClick }) => {
   const handleActive = () => {
-    console.log(activeId?.[name], id, activeId);
+    // console.log(activeId?.[name], id, activeId);
     return !!activeId?.[name] ? activeId?.[name] === id : false;
 
     // if (activeId?.[name] === id) {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Header.scss";
 // import { useStateValue } from "../../StateProvider";
@@ -7,7 +7,9 @@ import logo from "../../assets/images/online-shopping.png";
 
 const Header = () => {
   const [loginUserName, setLoginUserName] = useState("");
+  const [headerHeight, setHeaderHeight] = useState(null);
   const navigate = useNavigate();
+  const headerRef = useRef();
   const cartListData = useSelector((state) => state.counterReducer.cartList);
   // const { myReducer } = useStateValue();
 
@@ -36,15 +38,13 @@ const Header = () => {
     navigate("/login");
   };
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     localStorage.clear();
-  //   }, 5000);
-  // });
+  useEffect(() => {
+    setHeaderHeight(headerRef.current.clientHeight);
+  }, []);
 
   return (
     <>
-      <header>
+      <header ref={headerRef}>
         <div className="header-logo">
           <Link to="/">
             <img className="logo" src={logo} alt="logo" />

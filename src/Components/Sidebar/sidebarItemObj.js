@@ -27,6 +27,20 @@ export const sidebarItemObj = [
             name: "Home22",
             image: image3,
             arrow: <DownArrow />,
+            childrens: [
+              {
+                id: 61,
+                name: "Home11",
+                image: image3,
+                arrow: <DownArrow />,
+              },
+              {
+                id: 62,
+                name: "Home22",
+                image: image3,
+                arrow: <DownArrow />,
+              },
+            ],
           },
         ],
       },
