@@ -33,22 +33,47 @@ const Stepper = () => {
   const [stepperForm, setStepperForm] = useState(0);
   const [maxStep, setMaxStep] = useState(0);
 
+  // const hancleClick = (id) => {
+  //   setStepperId(id);
+  //   const newData = data.map((e, i) => {
+  //     if (id - 1 >= i) {
+  //       if (id > maxStep) {
+  //         setStepperForm(maxStep);
+  //         return { ...e, complete: false };
+  //       } else {
+  //         return { ...e, complete: true };
+  //       }
+  //     } else {
+  //       setStepperForm(id);
+  //       console.log("else", id, maxStep);
+  //       return { ...e, complete: false };
+  //     }
+  //   });
+  //   setData(newData);
+  // };
+
   const hancleClick = (id) => {
-    const newData = data.map((e, i) => {
-      if (id - 1 >= i) {
-        if (id > maxStep) {
-          setStepperForm(maxStep);
-          return { ...e, complete: false };
-        } else {
+    if (id - 1 >= maxStep) {
+      setStepperForm(maxStep);
+      let newData = data.map((e, i) => {
+        if (i < maxStep) {
           return { ...e, complete: true };
+        } else {
+          return { ...e, complete: false };
         }
-      } else {
-        setStepperForm(id);
-        console.log("else", id, maxStep);
-        return { ...e, complete: false };
-      }
-    });
-    setData(newData);
+      });
+      setData(newData);
+    } else {
+      setStepperForm(id);
+      let newData = data.map((e, i) => {
+        if (i < id) {
+          return { ...e, complete: true };
+        } else {
+          return { ...e, complete: false };
+        }
+      });
+      setData(newData);
+    }
   };
 
   return (
@@ -62,13 +87,15 @@ const Stepper = () => {
         ))}
       </div>
       <div className="stepperContent">
+        {/* {stepperForm === 0 && <FirstStepperForm  />}
+        {stepperForm === 1 && <SecondStepperForm />}
+        {stepperForm === 2 && <ThirdStepperForm />}
+        {stepperForm === 3 && <FourthStepperForm />} */}
         {data.map((d, i) => {
           if (i === stepperForm) {
-            const MainComp = d.comp;
-
             return (
               <div className="stepperFormWrapper">
-                <MainComp
+                <d.comp
                   data={data}
                   setData={setData}
                   setStepperForm={setStepperForm}
@@ -78,6 +105,9 @@ const Stepper = () => {
               </div>
             );
           }
+          // else {
+          //   return "hello";
+          // }
         })}
       </div>
     </div>
