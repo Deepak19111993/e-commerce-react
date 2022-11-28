@@ -28,27 +28,28 @@ const dotData = [
   },
 ];
 
-// console.log("dotData", dotData);
-
 const Stepper = () => {
   const [data, setData] = useState(dotData);
   const [stepperForm, setStepperForm] = useState(0);
+  const [maxStep, setMaxStep] = useState(0);
 
   const hancleClick = (id) => {
-    setStepperForm(id);
-
     const newData = data.map((e, i) => {
       if (id - 1 >= i) {
-        return { ...e, complete: true };
+        if (id > maxStep) {
+          setStepperForm(maxStep);
+          return { ...e, complete: false };
+        } else {
+          return { ...e, complete: true };
+        }
       } else {
+        setStepperForm(id);
+        console.log("else", id, maxStep);
         return { ...e, complete: false };
       }
     });
-
     setData(newData);
   };
-
-  console.log(stepperForm);
 
   return (
     <div className="stepperWrapper">
@@ -64,12 +65,15 @@ const Stepper = () => {
         {data.map((d, i) => {
           if (i === stepperForm) {
             const MainComp = d.comp;
+
             return (
               <div className="stepperFormWrapper">
                 <MainComp
                   data={data}
                   setData={setData}
                   setStepperForm={setStepperForm}
+                  setMaxStep={setMaxStep}
+                  maxStep={maxStep}
                 />
               </div>
             );
