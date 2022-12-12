@@ -14,10 +14,10 @@ const Sidebar = () => {
     setSidebarWidth(sidebarRef.current.clientWidth);
     const contentWidth = document.querySelector(".content");
     contentWidth.style.paddingLeft = sidebarWidth + "px";
-    console.log("contentWidth", contentWidth);
+    // console.log("contentWidth", contentWidth);
   }, [sidebarWidth]);
 
-  console.log("sidebarWidth", sidebarWidth);
+  // console.log("sidebarWidth", sidebarWidth);
 
   const handleClick = (id, name) => {
     if (activeId?.[name] === id) {
@@ -50,6 +50,7 @@ const Sidebar = () => {
     <div className="sidebar" ref={sidebarRef}>
       {sidebarItemObj.map((item, index) => (
         <SidebarItem
+          key={index}
           item={item}
           id={item.id}
           activeId={activeId}

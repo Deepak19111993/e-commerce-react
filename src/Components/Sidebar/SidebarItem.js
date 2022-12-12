@@ -26,6 +26,7 @@ const SidebarItem = ({ item, id, name, activeId, handleClick }) => {
         <div className="sidebar-content">
           {item.childrens.map((child, index) => (
             <SidebarItem
+              key={index}
               item={child}
               id={child.id}
               handleClick={handleClick}

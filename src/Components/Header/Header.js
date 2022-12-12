@@ -26,10 +26,10 @@ const Header = () => {
   //   );
   // }, []);
 
-  console.log(loginUserName, tokenObj);
+  // console.log(loginUserName, tokenObj);
 
   const signinClick = () => {
-    console.log("hey");
+    // console.log("hey");
     navigate("/login");
   };
 
@@ -59,7 +59,7 @@ const Header = () => {
             <li className="nav-item user">
               {/* <span>Hello {token ? loginUserName : "Guest"} </span> */}
               {tokenObj?.map((e, i) => (
-                <span>
+                <span key={i}>
                   Hello {e.firstname} {e.lastname}
                 </span>
               ))}
