@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import "./PdfUpload.scss";
+import React, { useEffect, useState } from 'react';
+import './PdfUpload.scss';
 // var PdfReader = require("pdfreader").PdfReader;
 
 const PdfUpload = () => {
-  const [selectedFile, setSelectedFile] = useState("");
-  const [selectedFileName, setSelectedFileName] = useState("");
+  const [selectedFile, setSelectedFile] = useState('');
+  const [selectedFileName, setSelectedFileName] = useState('');
   const [marginL, setMarginL] = useState(0);
 
   const handleChange = (e) => {
@@ -12,8 +12,8 @@ const PdfUpload = () => {
     setSelectedFile(URL.createObjectURL(e.target.files[0]));
   };
 
-  console.log("selectedFile", selectedFile);
-  console.log("selectedFile", selectedFileName);
+  console.log('selectedFile', selectedFile);
+  console.log('selectedFile', selectedFileName);
 
   const moveClickForward = () => {
     setMarginL(marginL + 50);
@@ -36,7 +36,7 @@ const PdfUpload = () => {
           </div>
         )}
       </div>
-      <div className="click" onClick={moveClickForward}>
+      {/* <div className="click" onClick={moveClickForward}>
         Forward
       </div>
       <div className="click" onClick={moveClickBackward}>
@@ -48,7 +48,7 @@ const PdfUpload = () => {
           marginLeft: marginL,
           transform: `rotate(${marginL}deg)`,
         }}
-      ></div>
+      ></div> */}
     </>
   );
 };

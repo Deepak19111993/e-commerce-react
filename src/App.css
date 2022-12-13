@@ -6,5 +6,6 @@ body{
 
 .content{
   /* padding-left: 300px; */
-  padding-top: 20px;
+  padding: 20px;
+  transition: .3s all;
 }

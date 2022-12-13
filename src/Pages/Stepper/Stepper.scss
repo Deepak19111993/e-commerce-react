@@ -15,10 +15,10 @@
       background: #f0f0f0;
       position: relative;
       &::after {
-        content: "";
+        content: '';
         width: 0;
         height: 2.4px;
-        background: orange;
+        background: #009688;
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
@@ -26,18 +26,18 @@
         transition: 0.8s all cubic-bezier(0.3, 1.11, 0.8, 0.76);
       }
       &.fill::after {
-        content: "";
+        content: '';
         width: 200px;
       }
       &:first-child {
-        background: orange;
+        background: #009688;
       }
       &.fill + .dot {
-        background: orange;
+        background: #009688;
       }
     }
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       left: 0;
       top: 50%;
@@ -59,7 +59,7 @@
       // border-radius: 30% 70% 70% 30% / 31% 53% 47% 69%;
       border-radius: 4px;
       // transition: 0.5s all;
-      border: 3px solid orange;
+      border: 3px solid #009688;
       border-top: 0;
       border-left: 0;
       position: relative;
@@ -76,18 +76,19 @@
           label {
             font-size: 16px;
             margin-bottom: 5px;
-            color: #ffa500;
-            text-shadow: 0 0 #ffa500;
+            color: #009688;
+            text-shadow: 0 0 #009688;
             letter-spacing: 0.5px;
           }
           input {
             height: 40px;
-            border: 1px solid #ccc;
+            border: 1px solid #009688;
             border-radius: 4px;
             padding: 0 12px;
             font-size: 16px;
             letter-spacing: 0.5px;
             outline: none;
+            color: #009688;
             &::placeholder {
               color: #ccc;
             }
@@ -114,8 +115,8 @@
           outline: none;
           border: none;
           height: 40px;
-          background: orange;
-          border: 1px solid orange;
+          background: #009688;
+          border: 1px solid #009688;
           color: #fff;
           display: flex;
           align-items: center;
@@ -131,7 +132,7 @@
           transition: 0.2s all ease-in-out;
           &:hover {
             background: #fff;
-            color: orange;
+            color: #009688;
           }
         }
       }
@@ -183,7 +184,7 @@
       outline: none;
       border: none;
       width: 60px;
-      background: orange;
+      background: #009688;
       border-radius: 4px;
       color: #fff;
       margin: 0 10px;
@@ -193,11 +194,11 @@
       justify-content: center;
       font-size: 16px;
       cursor: pointer !important;
-      box-shadow: 0 0 20px 0px orange;
+      box-shadow: 0 0 20px 0px #009688;
       font-weight: 600;
       position: relative;
       &.left::before {
-        content: "";
+        content: '';
         position: absolute;
         left: 50%;
         top: 50%;
@@ -210,7 +211,7 @@
         margin-left: 5px;
       }
       &.right::before {
-        content: "";
+        content: '';
         position: absolute;
         left: 50%;
         top: 50%;
@@ -225,7 +226,7 @@
     }
   }
   .ctm-btn {
-    background: orange;
+    background: #009688;
     padding: 0 15px;
     color: #fff;
     height: 40px;

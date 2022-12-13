@@ -1,23 +1,25 @@
-import React, { useEffect, useRef, useState } from "react";
-import "./Sidebar.scss";
-import SidebarItem from "./SidebarItem";
-import { sidebarItemObj } from "./sidebarItemObj";
-import { isEmpty } from "lodash";
+import React, { useEffect, useRef, useState } from 'react';
+import './Sidebar.scss';
+import SidebarItem from './SidebarItem';
+import { sidebarItemObj } from './sidebarItemObj';
+import { isEmpty } from 'lodash';
+import { Link } from 'react-router-dom';
+import logo from '../../assets/images/online-shopping.png';
 
-const Sidebar = () => {
+const Sidebar = ({ sidebarWidth, setSidebarWidth, collapse }) => {
   const [activeId, setActiveId] = useState({});
-  const [sidebarWidth, setSidebarWidth] = useState();
+  // const [sidebarWidth, setSidebarWidth] = useState();
 
   const sidebarRef = useRef();
 
   useEffect(() => {
     setSidebarWidth(sidebarRef.current.clientWidth);
-    const contentWidth = document.querySelector(".content");
-    contentWidth.style.paddingLeft = sidebarWidth + "px";
+    const contentWidth = document.querySelector('.content');
+    contentWidth.style.paddingLeft = sidebarWidth + 20 + 'px';
     // console.log("contentWidth", contentWidth);
   }, [sidebarWidth]);
 
-  // console.log("sidebarWidth", sidebarWidth);
+  console.log('sidebarWidth', sidebarWidth);
 
   const handleClick = (id, name) => {
     if (activeId?.[name] === id) {
@@ -47,7 +49,24 @@ const Sidebar = () => {
   // console.log(activeId, Object.keys(activeId));
 
   return (
-    <div className="sidebar" ref={sidebarRef}>
+    <div
+      className="sidebar"
+      ref={sidebarRef}
+      style={{ width: collapse ? '280px' : '50px' }}
+    >
+      <div className="header-logo">
+        <Link to="/">
+          <img
+            className="logo"
+            src={logo}
+            alt="logo"
+            style={{
+              width: collapse ? '50px' : '30px',
+              margin: collapse === false && '0',
+            }}
+          />
+        </Link>
+      </div>
       {sidebarItemObj.map((item, index) => (
         <SidebarItem
           key={index}

@@ -5,7 +5,7 @@ import CheckoutAd from './Components/CheckoutAd/CheckoutAd';
 import Header from './Components/Header/Header';
 import ProductList from './Components/ProductList/ProductList';
 import ShoppingBasket from './Components/ShoppingBasket/ShoppingBasket';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { getFetchData } from './redux/data/action';
 import { useDispatch } from 'react-redux';
 import Login from './Pages/Login/Login';
@@ -22,6 +22,9 @@ function App() {
   const location = useLocation();
   const dispatch = useDispatch();
 
+  const [sidebarWidth, setSidebarWidth] = useState();
+  const [collapse, setCollapse] = useState(true);
+
   useEffect(() => {
     dispatch(getFetchData());
   }, []);
@@ -32,11 +35,24 @@ function App() {
         ''
       ) : (
         <>
-          <Header />
-          <Sidebar />
+          <Header
+            collapse={collapse}
+            setCollapse={setCollapse}
+            sidebarWidth={sidebarWidth}
+            setSidebarWidth={setSidebarWidth}
+          />
+          <Sidebar
+            collapse={collapse}
+            setCollapse={setCollapse}
+            sidebarWidth={sidebarWidth}
+            setSidebarWidth={setSidebarWidth}
+          />
         </>
       )}
-      <div className="content">
+      <div
+        className="content"
+        style={{ paddingLeft: collapse ? '300px' : '70px' }}
+      >
         <Routes>
           <Route element={<PrivateRoutes />}>
             <Route

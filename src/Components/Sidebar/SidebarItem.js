@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const SidebarItem = ({ item, id, name, activeId, handleClick }) => {
   const handleActive = () => {
@@ -14,11 +15,11 @@ const SidebarItem = ({ item, id, name, activeId, handleClick }) => {
 
   if (item.childrens) {
     return (
-      <div className={`sidebar-item ${handleActive() ? "open" : ""}`}>
+      <div className={`sidebar-item ${handleActive() ? 'open' : ''}`}>
         <div className="sidebar-title" onClick={() => handleClick(id, name)}>
           <div className="title">
             <img src={item.image} alt="" />
-            {item.name}
+            <Link to={item.link}>{item.name}</Link>
           </div>
           <div className="arrow">{item.arrow}</div>
         </div>
@@ -39,11 +40,11 @@ const SidebarItem = ({ item, id, name, activeId, handleClick }) => {
     );
   } else {
     return (
-      <div className={`sidebar-item ${handleActive() ? "open" : ""}`}>
+      <div className={`sidebar-item ${handleActive() ? 'open' : ''}`}>
         <div className="sidebar-title" onClick={() => handleClick(id, name)}>
           <div className="title">
             <img src={item.image} alt="" />
-            {item.name}
+            <Link to={item.link}>{item.name}</Link>
           </div>
         </div>
       </div>

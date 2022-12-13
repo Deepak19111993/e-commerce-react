@@ -1,9 +1,9 @@
-import "./Banner.scss";
-import { useSelector, useDispatch } from "react-redux";
-import { getFetchData } from "../../redux/data/action";
-import { useEffect, useState } from "react";
-import { DatePicker } from "antd";
-import { useNavigate } from "react-router-dom";
+import './Banner.scss';
+import { useSelector, useDispatch } from 'react-redux';
+import { getFetchData } from '../../redux/data/action';
+import { useEffect, useState } from 'react';
+import { DatePicker } from 'antd';
+import { useNavigate } from 'react-router-dom';
 // import moment from "moment";
 
 // import DatePicker from "react-modern-calendar-datepicker";
@@ -47,7 +47,7 @@ const Banner = () => {
   // const [endStore, setEndStore] = useState([]);
 
   const bookClick = () => {
-    navigate("/slot");
+    navigate('/slot');
   };
 
   // const handleChange = (value) => {
@@ -232,121 +232,6 @@ const Banner = () => {
 
   return (
     <div className="banner">
-      {/* <ul className="ulList" type="number">
-        {number.map((item, index) => (
-          <li
-            onClick={() => handleClick(index)}
-            key={index}
-            // className={`item ${activeId === index ? "active" : ""}`}
-            className={`item ${selected.includes(index) ? "active" : ""}`}
-          >
-            {item.name}
-          </li>
-        ))}
-      </ul> */}
-
-      {/* <form>
-        <div className="input-field">
-          <div className="float-label">
-            <RangePicker
-              showTime
-              showToday
-              onChange={(e) => handleChange(e)}
-              format={"ddd, MMMM Do YYYY, h:mm:ss A"}
-            />
-          </div>
-        </div>
-      </form> */}
-
-      {/* {startStore
-        .map((e, i) => i !== startStore.length - 1 && e.day)
-        .includes(startDateValue.day) ||
-      endStore
-        .map((e, i) => i !== endStore.length - 1 && e.day)
-        .includes(endDateValue.day) ? (
-        <p style={{ textAlign: "center", color: "red", fontSize: "16px" }}>
-          Selected Day{" "}
-          {startStore.map((e, i) => e.day).includes(startDateValue.day) && (
-            <span style={{ textDecoration: "underline", color: "black" }}>
-              {startDateValue.day}
-            </span>
-          )}{" "}
-          {endStore.map((e, i) => e.day).includes(endDateValue.day) && (
-            <span>and</span>
-          )}{" "}
-          {endStore.map((e, i) => e.day).includes(endDateValue.day) && (
-            <span style={{ textDecoration: "underline", color: "black" }}>
-              {endDateValue.day}
-            </span>
-          )}{" "}
-          is already booked! Please Select another day!
-        </p>
-      ) : (
-        ""
-      )} */}
-
-      {/* {startdateRange && enddateRange && (
-        <div className="date-info">
-          <div className="block">
-            <div className="title">Start Date</div>
-            {startStore.map((e, i) => (
-              <div className="getDateValue">
-                <span> Day - {e.day}</span>
-                <span>Time - {e.time}</span>
-                <span>AST - {e.ast}</span>
-              </div>
-            ))}
-          </div>
-
-          <div className="block">
-            <div className="title">End Date</div>
-            {endStore.map((e, i) => (
-              <div className="getDateValue">
-                <span> Day - {e.day}</span>
-                <span>Time - {e.time}</span>
-                <span>AST - {e.ast}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      )} */}
-
-      {/* <div className="hexagon-a">
-        <form>
-          <div className="input-field">
-            <input placeholder="hello" />
-          </div>
-          <div className="input-field">
-            <input placeholder="hello" />
-          </div>
-        </form>
-      </div> */}
-
-      {/* color change on click */}
-
-      {/* <div className="color-wrapper">
-        <div
-          className="color-div"
-          style={{
-            background: colorValueId === "" ? "#000" : colorValueId.colorValue,
-          }}
-        ></div>
-        <div className="color-box">
-          {colorBox.map((e, i) => (
-            <div
-              key={i}
-              className="box"
-              onClick={() => handleClick(e)}
-              style={{ background: e.colorValue }}
-            ></div>
-          ))}
-        </div>
-      </div> */}
-
-      <button onClick={bookClick} className="timeButton">
-        Book Slot
-      </button>
-
       <img
         src="https://m.media-amazon.com/images/I/81KVdS+84PL._SX3000_.jpg"
         alt=""

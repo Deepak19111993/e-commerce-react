@@ -4,63 +4,69 @@ import './Quiz.scss';
 const questionPaper = [
   {
     id: 1,
-    question: 'What is the Answer of Question 1?',
-    option: ['1', '2', '3', '4'],
-    ans: '1',
+    question: 'What is the Capital of Iceland?',
+    option: ['Hafnarfjordur', 'Reykjavik', 'Selfoss', 'Vik'],
+    ans: 'Reykjavik',
   },
   {
     id: 2,
-    question: 'What is the Answer of Question 2?',
-    option: ['1', '2', '3', '4'],
-    ans: '4',
+    question: 'What is the National game of Bangladesh?',
+    option: ['Cricket', 'Football', 'Kabaddi', 'Shooting'],
+    ans: 'Kabaddi',
   },
   {
     id: 3,
-    question: 'What is the Answer of Question 3?',
-    option: ['1', '2', '3', '4'],
-    ans: '3',
+    question: 'In Which year the first world war begun?',
+    option: ['1912', '1913', '1914', '1915'],
+    ans: '1914',
   },
   {
     id: 4,
-    question: 'What is the Answer of Question 4?',
-    option: ['1', '2', '3', '4'],
-    ans: '1',
+    question: 'In Which year the second world war begun?',
+    option: ['1938', '1939', '1940', '1941'],
+    ans: '1939',
   },
   {
     id: 5,
-    question: 'What is the Answer of Question 5?',
-    option: ['1', '2', '3', '4'],
-    ans: '2',
+    question: 'Which on of the following is the tallest building in the world?',
+    option: [
+      'Sanghai Tower',
+      'Eiffel Tower',
+      'Petronas Twin Tower',
+      'Burj Khalifa',
+    ],
+    ans: 'Burj Khalifa',
   },
   {
     id: 6,
-    question: 'What is the Answer of Question 6?',
-    option: ['1', '2', '3', '4'],
-    ans: '4',
+    question:
+      'Which is  the largest continent in the world both population and area wise?',
+    option: ['North America', 'Europe', 'Africa', 'Asia'],
+    ans: 'Asia',
   },
   {
     id: 7,
-    question: 'What is the Answer of Question 7?',
-    option: ['1', '2', '3', '4'],
-    ans: '1',
+    question: 'Which is the longest river in the world?',
+    option: ['Yangtze', 'Amazon', 'Ganga', 'Nile'],
+    ans: 'Nile',
   },
   {
     id: 8,
-    question: 'What is the Answer of Question 8?',
-    option: ['1', '2', '3', '4'],
-    ans: '3',
+    question: 'Which Planet has maximum moons or natural satellites?',
+    option: ['Saturn', 'Uranus', 'Jupiter', 'Neptune'],
+    ans: 'Jupiter',
   },
   {
     id: 9,
-    question: 'What is the Answer of Question 9?',
-    option: ['1', '2', '3', '4'],
-    ans: '4',
+    question: 'Which planet is also known by the name of red planet?',
+    option: ['Mars', 'Jupiter', 'Earth', 'Mercury'],
+    ans: 'Mars',
   },
   {
     id: 10,
-    question: 'What is the Answer of Question 10?',
-    option: ['1', '2', '3', '4'],
-    ans: '2',
+    question: 'Which is the smallest continent in the world?',
+    option: ['Africa', 'Australia', 'South America', 'North America'],
+    ans: 'Australia',
   },
 ];
 
@@ -86,11 +92,12 @@ const Menu = () => {
             <>
               {step === i + 1 && (
                 <div className="quez" key={i}>
-                  <div className="heading">Question: {i + 1}</div>
-                  <div className="title">{l.question}</div>
+                  <div className="title">
+                    <div className="heading">{i + 1}.</div> {l.question}
+                  </div>
                   <div className="optionWrapper">
                     {l.option.map((e, index) => (
-                      <span>
+                      <span key={index}>
                         <input
                           id={`radioans${i}${index}`}
                           type="radio"
