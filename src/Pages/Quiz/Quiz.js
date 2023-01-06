@@ -124,6 +124,24 @@ const Menu = () => {
           </strong>
         </div>
       )}
+      {/* <div className="show-color-indicator">
+        <div className="color">
+          <span className="color-platte color1"></span>
+          <span className="text">0 to 25%</span>
+        </div>
+        <div className="color">
+          <span className="color-platte color2"></span>
+          <span className="text">26% to 50%</span>
+        </div>
+        <div className="color">
+          <span className="color-platte color3"></span>
+          <span className="text">51% to 75%</span>
+        </div>
+        <div className="color">
+          <span className="color-platte color4"></span>
+          <span className="text">76% to 100%</span>
+        </div>
+      </div> */}
     </div>
   );
 };

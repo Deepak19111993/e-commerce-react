@@ -89,3 +89,33 @@
     margin-bottom: 20px;
   }
 }
+// .show-color-indicator {
+//   display: flex;
+//   .color {
+//     display: flex;
+//     align-items: center;
+//     &:not(:last-child) {
+//       margin-right: 20px;
+//     }
+//     .color-platte {
+//       width: 15px;
+//       height: 15px;
+//       margin-right: 5px;
+//       &.color1 {
+//         background: #000;
+//       }
+//       &.color2 {
+//         background: green;
+//       }
+//       &.color3 {
+//         background: red;
+//       }
+//       &.color4 {
+//         background: blue;
+//       }
+//     }
+//     .text {
+//       color: #333;
+//     }
+//   }
+// }

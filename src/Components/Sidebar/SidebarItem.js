@@ -1,10 +1,19 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const SidebarItem = ({ item, id, name, activeId, handleClick }) => {
+const SidebarItem = ({
+  item,
+  id,
+  name,
+  activeId,
+  handleClick,
+  setCollapse,
+  collapse,
+}) => {
   const handleActive = () => {
     // console.log(activeId?.[name], id, activeId);
     return !!activeId?.[name] ? activeId?.[name] === id : false;
+    // setCollapse(!collapse);
 
     // if (activeId?.[name] === id) {
     //   return activeId?.[name] === id;
@@ -19,7 +28,7 @@ const SidebarItem = ({ item, id, name, activeId, handleClick }) => {
         <div className="sidebar-title" onClick={() => handleClick(id, name)}>
           <div className="title">
             <img src={item.image} alt="" />
-            <Link to={item.link}>{item.name}</Link>
+            {!collapse ? '' : <Link to={item.link}>{item.name}</Link>}
           </div>
           <div className="arrow">{item.arrow}</div>
         </div>
@@ -44,7 +53,7 @@ const SidebarItem = ({ item, id, name, activeId, handleClick }) => {
         <div className="sidebar-title" onClick={() => handleClick(id, name)}>
           <div className="title">
             <img src={item.image} alt="" />
-            <Link to={item.link}>{item.name}</Link>
+            {!collapse ? '' : <Link to={item.link}>{item.name}</Link>}
           </div>
         </div>
       </div>

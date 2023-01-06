@@ -1,20 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Header.scss';
-// import { useStateValue } from "../../StateProvider";
 import { useSelector } from 'react-redux';
-// import logo from '../../assets/images/online-shopping.png';
 
 const Header = ({ sidebarWidth, setCollapse, collapse }) => {
-  const [loginUserName, setLoginUserName] = useState('');
   const [headerHeight, setHeaderHeight] = useState(null);
   const navigate = useNavigate();
   const headerRef = useRef();
   const cartListData = useSelector((state) => state.counterReducer.cartList);
-  // const { myReducer } = useStateValue();
-
-  // const [state, dispatch] = myReducer;
-  // const [open, setOpen] = useState(false);
 
   const token = localStorage.getItem('token');
 
@@ -22,21 +15,12 @@ const Header = ({ sidebarWidth, setCollapse, collapse }) => {
 
   console.log(tokenObj);
 
-  // useEffect(() => {
-  //   setLoginUserName(
-  //     Object.entries(tokenObj).map(([key, val]) => val.firstname)
-  //   );
-  // }, []);
-
-  // console.log(loginUserName, tokenObj);
-
   const signinClick = () => {
-    // console.log("hey");
     navigate('/login');
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
+    localStorage.clear();
     navigate('/login');
   };
 
@@ -60,6 +44,7 @@ const Header = ({ sidebarWidth, setCollapse, collapse }) => {
         <div className="header-search-bar">
           {tokenObj?.map((e, i) => (
             <input
+              key={e.firstname}
               placeholder={`Hey ${e.firstname} Search Here !!!`}
               name="search"
             />
@@ -71,7 +56,7 @@ const Header = ({ sidebarWidth, setCollapse, collapse }) => {
             <li className="nav-item user">
               {/* <span>Hello {token ? loginUserName : "Guest"} </span> */}
               {tokenObj?.map((e, i) => (
-                <span key={i}>
+                <span key={e.firstname}>
                   Hey{' '}
                   <span style={{ color: '#009688' }}>
                     {e.firstname} {e.lastname}

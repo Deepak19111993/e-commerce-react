@@ -17,6 +17,7 @@ import Sidebar from './Components/Sidebar/Sidebar';
 import PdfUpload from './Components/PdfUpload/PdfUpload';
 import Stepper from './Pages/Stepper/Stepper';
 import Quiz from './Pages/Quiz/Quiz';
+import ErrorBoundary from './ErrorBoundary';
 
 function App() {
   const location = useLocation();
@@ -53,40 +54,42 @@ function App() {
         className="content"
         style={{ paddingLeft: collapse ? '300px' : '70px' }}
       >
-        <Routes>
-          <Route element={<PrivateRoutes />}>
-            <Route
-              exact
-              path="/"
-              element={
-                <>
-                  <Banner />
-                  <ProductList />
-                </>
-              }
-            />
-            <Route
-              exact
-              path="/checkout"
-              element={
-                <>
-                  <CheckoutAd />
-                  <ShoppingBasket />
-                </>
-              }
-            />
-            <Route exact path="/slot" element={<Slot />} />
-            <Route exact path="/pdfupload" element={<PdfUpload />} />
-            <Route exact path="/stepper" element={<Stepper />} />
-            <Route exact path="/quiz" element={<Quiz />} />
-          </Route>
+        <ErrorBoundary>
+          <Routes>
+            <Route element={<PrivateRoutes />}>
+              <Route
+                exact
+                path="/"
+                element={
+                  <>
+                    <Banner />
+                    <ProductList />
+                  </>
+                }
+              />
+              <Route
+                exact
+                path="/checkout"
+                element={
+                  <>
+                    <CheckoutAd />
+                    <ShoppingBasket />
+                  </>
+                }
+              />
+              <Route exact path="/slot" element={<Slot />} />
+              <Route exact path="/pdfupload" element={<PdfUpload />} />
+              <Route exact path="/stepper" element={<Stepper />} />
+              <Route exact path="/quiz" element={<Quiz />} />
+            </Route>
 
-          <Route element={<PublicRoutes />}>
-            <Route exact path="/login" element={<Login />} />
-            <Route exact path="/signup" element={<SignUp />} />
-          </Route>
-          <Route exact path="*" element={<Navigate to="/login" />} />
-        </Routes>
+            <Route element={<PublicRoutes />}>
+              <Route exact path="/login" element={<Login />} />
+              <Route exact path="/signup" element={<SignUp />} />
+            </Route>
+            <Route exact path="*" element={<Navigate to="/login" />} />
+          </Routes>
+        </ErrorBoundary>
       </div>
     </div>
   );

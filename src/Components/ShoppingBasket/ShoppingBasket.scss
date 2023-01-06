@@ -35,11 +35,12 @@
     .count {
       display: flex;
       align-items: center;
-      border: 2px solid #ccc;
+      border: 2px solid #009688;
       width: fit-content;
       .action {
         padding: 3px 15px;
-        background: #ccc;
+        background: #009688;
+        color: #fff;
         cursor: pointer !important;
         font-size: 14px;
       }

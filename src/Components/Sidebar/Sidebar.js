@@ -6,10 +6,10 @@ import { isEmpty } from 'lodash';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/images/online-shopping.png';
 
-const Sidebar = ({ sidebarWidth, setSidebarWidth, collapse }) => {
+const Sidebar = ({ sidebarWidth, setSidebarWidth, collapse, setCollapse }) => {
   const [activeId, setActiveId] = useState({});
   // const [sidebarWidth, setSidebarWidth] = useState();
-
+  console.log('activeId', activeId);
   const sidebarRef = useRef();
 
   useEffect(() => {
@@ -43,10 +43,9 @@ const Sidebar = ({ sidebarWidth, setSidebarWidth, collapse }) => {
         ...duplicateActiveIds,
         [name]: id,
       });
+      !collapse && setCollapse(true);
     }
   };
-
-  // console.log(activeId, Object.keys(activeId));
 
   return (
     <div
@@ -75,6 +74,8 @@ const Sidebar = ({ sidebarWidth, setSidebarWidth, collapse }) => {
           activeId={activeId}
           name={1}
           handleClick={handleClick}
+          collapse={collapse}
+          setCollapse={setCollapse}
         />
       ))}
     </div>
